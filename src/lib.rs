@@ -71,13 +71,6 @@ use std::thread::{self, JoinHandle};
 // the registry and from COM interfaces
 #[cfg(windows)]
 mod registry;
-#[cfg(windows)]
-#[macro_use]
-mod winapi;
-#[cfg(windows)]
-mod com;
-#[cfg(windows)]
-mod setup_config;
 
 pub mod windows_registry;
 
@@ -162,7 +155,7 @@ impl From<io::Error> for Error {
 }
 
 impl Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}: {}", self.kind, self.message)
     }
 }
